@@ -1,15 +1,16 @@
 :root {
-  --primaria: #52632d;
+  --primaria: #0e640e;
 }
 
 .footer {
   background-color: #f5f5f5;
   height: 35px;
   font-weight: 500;
+
 }
 
 .page-base {
-  height: 94vh;
+  height: 90vh;
   background-color: #f5f5f5;
 }
 
@@ -29,8 +30,65 @@
 }
 
 .botao:hover {
-    background-color: #056901;
-    box-shadow: 1px 1px 8px;
-    color: #95f547;
-    font-weight: 600;
+  background-color: #526d2e;
+  box-shadow: 1px 1px 8px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.option {
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 60%;
+  cursor: pointer;
+  background-color: var(--primaria);
+}
+
+.option-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  transition: all 0.4s;
+}
+
+.option-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  transition: all 0.4s;
+}
+
+.option-overlay {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.option-description {
+  transform: translateY(0.5rem);
+  transition: all 0.7s;
+  opacity: 0;
+  display: none;
+}
+
+.option:hover .option-content {
+  bottom: 1rem;
+}
+
+.option:hover .option-description {
+  opacity: 5;
+  transform: none;
+  display: block;
+  transition: all 0.4s;
+}
+
+.option:hover .option-overlay {
+  opacity: 0;
+}
+
+.option:hover {
+  box-shadow: 0px 0px 18px -5px rgba(0, 0, 0, 0.96);
+  transition: all 0.4s;
 }

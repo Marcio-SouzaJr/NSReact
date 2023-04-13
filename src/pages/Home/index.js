@@ -1,9 +1,9 @@
-import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
     <>
-      <div className="container-fluid mt-2 d-flex align-items-center page-base px-5">
+      <div className="container-fluid mt-3 d-flex align-items-center page-base px-5">
         <div className="row gx-lg-5 col-12 mx-2">
           <div className="col-lg-6 mb-5 ">
             <h1 className="my-5 display-3 fw-bold titulo">
@@ -11,8 +11,8 @@ const Home = () => {
               <span className="display-6 text-dark">Agronegocios</span>
             </h1>
             <p>
-              Sistema de Gerenciamento de clientes, contratos e saldos internos da Nova Safra
-              Agronegocios.
+              Sistema de Gerenciamento de clientes, contratos e saldos internos
+              da Nova Safra Agronegocios.
             </p>
           </div>
 
@@ -50,20 +50,20 @@ const Home = () => {
                       Lembrar os meus dados
                     </label>
                   </div>
-
-                  <button
-                    type="submit"
-                    className=" botao btn-block mb-4 position-absolute bottom-0 start-50 translate-middle-x"
-                  >
-                    Login
-                  </button>
+                  <Link to={"/selection"}>
+                    <button
+                      type="submit"
+                      className=" botao btn-block mb-4 position-absolute bottom-0 start-50 translate-middle-x"
+                    >
+                      Login
+                    </button>
+                  </Link>
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
