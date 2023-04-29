@@ -2,6 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Selection from "./pages/Selection";
 import Footer from "./components/Footer";
+import Clientes from "./pages/Clientes";
+import Fornecedores from "./pages/Fornecedores";
+import Fabricas from "./pages/Fabricas";
+import Produtos from "./pages/Produtos";
+import Vendas from "./pages/vendas";
+import Embarques from "./pages/Embarques";
 
 
 
@@ -10,7 +16,13 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route index path="/" element={<Home/>}/>
-      <Route index path="/selection" element={<Selection/>}/>
+      <Route  path="/selection" element={<Selection/>}/>
+      <Route  path="/clientes" element={<Clientes/>}/>
+      <Route  path="/fornecedores" element={<Fornecedores/>}/>
+      <Route  path="/fornecedores/fabricas" element={<Fabricas/>}/>
+      <Route  path="/fornecedores/produtos" element={<Produtos/>}/>
+      <Route  path="/vendas" element={<Vendas/>}/>
+      <Route  path="/embarques" element={<Embarques/>}/>
     </Routes>
     <Footer/>
     </BrowserRouter>

@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import { Link } from "react-router-dom";
 
 const Selection = () => {
   return (
@@ -7,7 +8,9 @@ const Selection = () => {
       <div className="row container-fluid py-2 m-0 page-base">
         <div className="col-sm-6 col-lg-4 pt-2" id="clientes">
           <div className="option text-white rounded ">
-            <div className="option-overlay"></div>
+            <Link to={"/clientes"}>
+              <div className="option-overlay"></div>
+            </Link>
             <div className="option-content px-3 py-4">
               <h3 className="hover-1-title text-uppercase font-weight-bold mb-0">
                 Clientes
@@ -21,7 +24,9 @@ const Selection = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2" id="fornecedores">
           <div className="option text-white rounded ">
-            <div className="option-overlay"></div>
+          <Link to={"/fornecedores"}>
+              <div className="option-overlay"></div>
+            </Link>
             <div className="option-content px-3 py-4">
               <h3 className="hover-1-title text-uppercase font-weight-bold mb-0">
                 Fornecedores
@@ -35,7 +40,9 @@ const Selection = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2" id="vendas">
           <div className="option text-white rounded">
-            <div className="option-overlay"></div>
+          <Link to={"/vendas"}>
+              <div className="option-overlay"></div>
+            </Link>
             <div className="option-content px-3 py-4">
               <h3 className="hover-1-title text-uppercase font-weight-bold mb-0">
                 Vendas
@@ -48,7 +55,9 @@ const Selection = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2">
           <div className="option text-white rounded" id="embarques">
-            <div className="option-overlay"></div>
+          <Link to={"/embarques"}>
+              <div className="option-overlay"></div>
+            </Link>
             <div className="option-content px-3 py-4">
               <h3 className="hover-1-title text-uppercase font-weight-bold mb-0">
                 Embarques
