@@ -55,29 +55,29 @@ const Clientes = () => {
                   <div className="invalid-feedback">Nome invalido</div>
                 </div>
               </div>
-              <div class="mb-3">
+              <div className="mb-3">
                 <label for="nome-completo">Nome Completo</label>
-                <div class="input-group">
-                  <div class="input-group-prepend"></div>
+                <div className="input-group">
+                  <div className="input-group-prepend"></div>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="nome-completo"
                     placeholder="Nome do CPF ou CNPJ"
                     required
                   />
                 </div>
               </div>
-              <div class="mb-3">
+              <div className="mb-3">
                 <label for="email">E-mail</label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   id="email"
                   placeholder="email@exemplo.com"
                 />
               </div>
-              <div class="mb-4">
+              <div className="mb-4">
                 <label for="telefone">
                   Telefone<span className="text-muted"> (somente numeros)</span>
                 </label>
@@ -96,146 +96,148 @@ const Clientes = () => {
                       id="cpf"
                       name="documento"
                       type="radio"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       checked
                       required
                     />
-                    <label class="custom-control-label ps-1" for="cpf">
+                    <label className="custom-control-label ps-1" for="cpf">
                       CPF
                     </label>
                   </div>
-                  <div class="input-group-text">
+                  <div className="input-group-text">
                     <input
                       id="cnpj"
                       name="documento"
                       type="radio"
-                      class="custom-control-input"
+                      className="custom-control-input"
                       required
                     />
-                    <label class="custom-control-label ps-1" for="cnpj">
+                    <label className="custom-control-label ps-1" for="cnpj">
                       CNPJ
                     </label>
                   </div>
                 </div>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   aria-label="Text input with radio button"
                   placeholder="Somente numeros"
                 />
               </div>
-              <div class="mb-3">
+              <div className="mb-3">
                 <label for="Inscricao">Inscrição Estadual</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="Inscricao"
                   placeholder="99999999"
                 />
-                <div class="invalid-feedback">Inscricao estadual invalida.</div>
+                <div className="invalid-feedback">
+                  Inscricao estadual invalida.
+                </div>
               </div>
-              <hr class="mb-4" />
-              <h4 class="mb-3">Setor</h4>
+              <hr className="mb-4" />
+              <h4 className="mb-3">Setor</h4>
               <div className="row">
-                <div class="custom-control custom-checkbox col-md-4 mb-3">
+                <div className="custom-control custom-checkbox col-md-4 mb-3">
                   <input
                     type="checkbox"
-                    class="custom-control-input me-1"
+                    className="custom-control-input me-1"
                     id="frango-corte"
                   />
-                  <label class="custom-control-label" for="frango-corte">
+                  <label className="custom-control-label" for="frango-corte">
                     Frango de Corte
                   </label>
                 </div>
-                <div class="custom-control custom-checkbox col-md-4 mb-3">
+                <div className="custom-control custom-checkbox col-md-4 mb-3">
                   <input
                     type="checkbox"
-                    class="custom-control-input me-1"
+                    className="custom-control-input me-1"
                     id="frango-postura"
                   />
-                  <label class="custom-control-label" for="frango-postura">
+                  <label className="custom-control-label" for="frango-postura">
                     Frango de Postura
                   </label>
                 </div>
-                <div class="custom-control custom-checkbox col-md-4 mb-3">
+                <div className="custom-control custom-checkbox col-md-4 mb-3">
                   <input
                     type="checkbox"
-                    class="custom-control-input me-1"
+                    className="custom-control-input me-1"
                     id="gado-leite"
                   />
-                  <label class="custom-control-label" for="gado-leite">
+                  <label className="custom-control-label" for="gado-leite">
                     Gado de Leite
                   </label>
                 </div>
-                <div class="custom-control custom-checkbox col-md-4 mb-3">
+                <div className="custom-control custom-checkbox col-md-4 mb-3">
                   <input
                     type="checkbox"
-                    class="custom-control-input me-1"
+                    className="custom-control-input me-1"
                     id="gado-corte"
                   />
-                  <label class="custom-control-label" for="gado-corte">
+                  <label className="custom-control-label" for="gado-corte">
                     Gado de Corte
                   </label>
                 </div>
-                <div class="custom-control custom-checkbox col-md-4 mb-3">
+                <div className="custom-control custom-checkbox col-md-4 mb-3">
                   <input
                     type="checkbox"
-                    class="custom-control-input me-1"
+                    className="custom-control-input me-1"
                     id="comercio"
                   />
-                  <label class="custom-control-label" for="comercio">
+                  <label className="custom-control-label" for="comercio">
                     Comércio
                   </label>
                 </div>
               </div>
-              <hr class="mb-4" />
-              <h4 class="mb-3">Endereço de Cobrança</h4>
-              <div class="row">
-                <div class="col-md-4 mb-3">
+              <hr className="mb-4" />
+              <h4 className="mb-3">Endereço de Cobrança</h4>
+              <div className="row">
+                <div className="col-md-4 mb-3">
                   <label for="municipio">Municipio</label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="municipio"
                     placeholder="Municipio"
                     required
                   />
                 </div>
-                <div class="col-md-4 mb-3">
+                <div className="col-md-4 mb-3">
                   <label for="estado">Estado</label>
-                  <span class="text-muted">(Abreviação)</span>
+                  <span className="text-muted">(Abreviação)</span>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="estado"
                     placeholder="PE"
                     required
                   />
                 </div>
-                <div class="col-md-4 mb-3">
+                <div className="col-md-4 mb-3">
                   <label for="cep">CEP</label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="cep"
                     placeholder="00000000"
                     required
                   />
                 </div>
-                <div class="col-md-12 mb-3">
+                <div className="col-md-12 mb-3">
                   <label for="logradouro">Logradouro</label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="logradouro"
                     placeholder="Sitio Granja Nova Safra"
                     required
                   />
                 </div>
-                <div class="custom-control custom-checkbox col-md-10 mb-2">
+                <div className="custom-control custom-checkbox col-md-10 mb-2">
                   <input
                     type="checkbox"
-                    class="custom-control-input me-1"
+                    className="custom-control-input me-1"
                     id="mesmo-endereco"
                     onChange={() => {
                       console.log("clicou");
@@ -243,69 +245,69 @@ const Clientes = () => {
                       exibir();
                     }}
                   />
-                  <label class="custom-control-label" for="mesmo-endereco">
+                  <label className="custom-control-label" for="mesmo-endereco">
                     Endereço de faturamento é o mesmo de cobrança
                   </label>
                 </div>
               </div>
-              <hr class="mb-4" />
+              <hr className="mb-4" />
 
               {mesmoEndereco ? (
                 <></>
               ) : (
                 <>
                   {" "}
-                  <h4 class="mb-3">Endereço de Faturamento</h4>
-                  <div class="row">
-                    <div class="col-md-4 mb-3">
+                  <h4 className="mb-3">Endereço de Faturamento</h4>
+                  <div className="row">
+                    <div className="col-md-4 mb-3">
                       <label for="municipio">Municipio</label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="municipio"
                         placeholder="Municipio"
                         required
                       />
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div className="col-md-4 mb-3">
                       <label for="estado">Estado</label>
-                      <span class="text-muted">(Abreviação)</span>
+                      <span className="text-muted">(Abreviação)</span>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="estado"
                         placeholder="PE"
                         required
                       />
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div className="col-md-4 mb-3">
                       <label for="cep">CEP</label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="cep"
                         placeholder="00000000"
                         required
                       />
                     </div>
-                    <div class="col-md-12 mb-3">
+                    <div className="col-md-12 mb-3">
                       <label for="logradouro">Logradouro</label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="logradouro"
                         placeholder="Sitio Granja Nova Safra"
                         required
                       />
                     </div>
                   </div>
-                  <hr class="mb-4" />{" "}
+                  <hr className="mb-4" />{" "}
                 </>
               )}
 
               <div align="center">
                 <button
-                  class="btn btn-primary btn-lg btn-block px-5"
+                  className="btn btn-primary btn-lg btn-block px-5"
                   type="submit"
                 >
                   Cadastrar

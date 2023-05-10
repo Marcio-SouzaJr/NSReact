@@ -8,6 +8,7 @@ import Fabricas from "./pages/Fabricas";
 import Produtos from "./pages/Produtos";
 import Vendas from "./pages/vendas";
 import Embarques from "./pages/Embarques";
+import Saldos from "./pages/Saldos";
 
 
 
@@ -23,6 +24,7 @@ function App() {
       <Route  path="/fornecedores/produtos" element={<Produtos/>}/>
       <Route  path="/vendas" element={<Vendas/>}/>
       <Route  path="/embarques" element={<Embarques/>}/>
+      <Route  path="/saldos" element={<Saldos/>}/>
     </Routes>
     <Footer/>
     </BrowserRouter>

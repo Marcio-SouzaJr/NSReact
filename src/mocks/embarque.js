@@ -1,0 +1,18 @@
+export const embarque = [
+  { id: 1,
+    cliente: "Fernando Lisboa",
+    contrato: "3256",
+    volume: 48.9,
+    placa: "KLF5897",
+    nota: "1234568",
+    data: "06-05-2023",
+  },
+  { id: 1,
+    cliente: "Adelbar Pontes",
+    contrato: "3210",
+    volume: 48.7,
+    placa: "KYU7894",
+    nota: "87654321",
+    data: "07-05-2023",
+  },
+];
