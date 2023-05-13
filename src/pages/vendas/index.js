@@ -42,7 +42,6 @@ const Vendas = () => {
                     <option selected>Selecionar Fabrica</option>
                     <option value="1">Oleoplan Nordeste</option>
                     <option value="2">Cargill Barreiras</option>
-                    <option value="3">Cargil Rio Verde</option>
                   </select>
                 </div>
                 <div className="w-25 mb-3">

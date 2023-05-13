@@ -124,16 +124,30 @@ const Clientes = () => {
                   placeholder="Somente numeros"
                 />
               </div>
-              <div className="mb-3">
-                <label for="Inscricao">Inscrição Estadual</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="Inscricao"
-                  placeholder="99999999"
-                />
-                <div className="invalid-feedback">
-                  Inscricao estadual invalida.
+              <div className="d-flex">
+                <div className=" col-md-3 mb-3 me-5">
+                  <label for="Inscricao">Inscrição Estadual</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="Inscricao"
+                    placeholder="99999999"
+                  />
+                </div>
+                <div className=" col-md-3 mb-3">
+                  <label for="prazo">Prazo de pagamento</label>
+                  <select
+                    class="form-select"
+                  >
+                    <option selected>Antecipado</option>
+                    <option value="7">7 dias</option>
+                    <option value="15">15 dias</option>
+                    <option value="21">21 dias</option>
+                    <option value="25">25 dias</option>
+                    <option value="28">28 dias</option>
+                    <option value="21, 25 e 28">21, 25 e 28 dias</option>
+                    
+                  </select>
                 </div>
               </div>
               <hr className="mb-4" />

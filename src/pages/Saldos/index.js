@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar";
 import { cliente } from "../../mocks/cliente";
 import { produto } from "../../mocks/produto";
 import { contrato } from "../../mocks/contrato";
-import { sortObjects, getSum, filterByName } from "../../utils";
+import { sortObjects, getSum, filtrarContratos } from "../../utils";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -10,8 +10,14 @@ const Saldos = () => {
   const clientes = [];
   const produtos = [];
   const contratos = [];
-  const [nomeFiltrado, setNomeFiltrado] = useState(clientes);
+  const [nomeFiltrado, setNomeFiltrado] = useState("");
   const [contratosFiltrados, setContratosFiltrados] = useState(contratos);
+  const [produtoFiltrado, setProdutoFiltrado] = useState("")
+
+  
+  contrato.map((contrato) => {
+    return contratos.push(contrato);
+  });
 
   cliente.map((cliente) => {
     return clientes.push(cliente.nomeReduzido);
@@ -21,17 +27,16 @@ const Saldos = () => {
     return produtos.push(produto.nomeProduto);
   });
 
-  contrato.map((contrato) => {
-    return contratos.push(contrato);
-  });
   const totais = getSum(contratosFiltrados);
 
-  useEffect(() => {
-    const filtrados = filterByName(nomeFiltrado, contratos);
-    setContratosFiltrados(filtrados);
-  }, [nomeFiltrado]);
 
-  console.log(contratosFiltrados)
+  useEffect(() => {
+    const filtrados = filtrarContratos(nomeFiltrado, contratos, produtoFiltrado);
+    setContratosFiltrados(filtrados);
+  }, [nomeFiltrado, produtoFiltrado]);
+
+
+
 
   return (
     <>
@@ -56,7 +61,7 @@ const Saldos = () => {
         <div className="col-6">
           <select
             className="form-select"
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e) => setProdutoFiltrado(e.target.value)}
           >
             <option value={""}>Filtrar por produto</option>
             {produtos.sort()?.map((produtos, index) => {
@@ -99,30 +104,30 @@ const Saldos = () => {
           </tbody>
         </table>
       </div>
-      <div className="d-flex justify-content-around">
-        <div className="card border-2 col-lg-2">
+      <div className="d-flex justify-content-around mb-3">
+        <div className="card border-2 col-xm-6 col-lg-2">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja:  ${
               totais[0] + totais[1] + totais[2]
             }T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-lg-2">
+        <div className="card border-2 col-xm-6 col-lg-2">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja 45%: ${totais[0]}T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-lg-2">
+        <div className="card border-2 col-xm-6 col-lg-2">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja 46%:  ${totais[1]}T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-lg-2">
+        <div className="card border-2 col-xm-6 col-lg-2">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja Ensacado:  ${totais[2]}T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-lg-2">
+        <div className="card border-2 col-xm-6 col-lg-2">
           <div className="card-body">
             <h5 className="card-title">{`Total Casca:  ${totais[3]}T `}</h5>
           </div>

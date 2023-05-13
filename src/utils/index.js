@@ -31,7 +31,7 @@ export const getSum = (array) => {
   return [sum45, sum46, sumEnsacado, sumCasca];
 };
 
-export const filterByName = (nome, contrato) => {
+export const filtrarContratos = (nome, contrato, produto) => {
   let contratos = [];
   if (nome === "") {
     contrato.map((contrato) => {
@@ -44,6 +44,17 @@ export const filterByName = (nome, contrato) => {
       }
     });
   }
+  contratos = contratos.filter((contrato) => {
+    if (produto === ""){
+      return contrato
+    }
+    else {
+      if (contrato.produto === produto) {
+        return contrato
+      }
+    }
+  })
 
   return contratos;
 };
+
