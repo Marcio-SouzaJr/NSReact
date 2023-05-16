@@ -58,7 +58,7 @@ const Saldos = () => {
           </select>
         </div>
 
-        <div className="col-6">
+        <div className="col-6 ">
           <select
             className="form-select"
             onChange={(e) => setProdutoFiltrado(e.target.value)}
@@ -74,7 +74,7 @@ const Saldos = () => {
           </select>
         </div>
       </div>
-      <div className="row px-3">
+      <div className="row mx-3 mb-2 border shadow ">
         <table className="table table-striped table-hover">
           <thead>
             <tr>
@@ -105,29 +105,29 @@ const Saldos = () => {
         </table>
       </div>
       <div className="d-flex justify-content-around mb-3">
-        <div className="card border-2 col-xm-6 col-lg-2">
+        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja:  ${
               totais[0] + totais[1] + totais[2]
             }T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-xm-6 col-lg-2">
+        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja 45%: ${totais[0]}T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-xm-6 col-lg-2">
+        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja 46%:  ${totais[1]}T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-xm-6 col-lg-2">
+        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja Ensacado:  ${totais[2]}T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-xm-6 col-lg-2">
+        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
           <div className="card-body">
             <h5 className="card-title">{`Total Casca:  ${totais[3]}T `}</h5>
           </div>

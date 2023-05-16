@@ -74,7 +74,7 @@ export const cliente = [
   {
     id: 4,
     nomeReduzido: "Jose Almeida",
-    nomeCompleto: "Arthur Soares de Moraes",
+    nomeCompleto: "José de Almeida Cordeiro",
     email: "novasafra.fiscal@gmail.com",
     telefone: "81996970001",
     cadastro: "CPF",
@@ -82,7 +82,7 @@ export const cliente = [
     inscricaoEstadual: "32707851",
     setor: ["Frango de Corte", "Frango de Postura"],
     enderecoCobranca: {
-      municipio: "Machados",
+      municipio: "Sao Bento do Una",
       estado: "PE",
       cep: "55740000",
       logradouro: "Fazenda Lajes s/n - Zona Rural",
@@ -98,7 +98,7 @@ export const cliente = [
   {
     id: 5,
     nomeReduzido: "Antonio Costa",
-    nomeCompleto: "Arthur Soares de Moraes",
+    nomeCompleto: "Antonio Costa Souza",
     email: "novasafra.fiscal@gmail.com",
     telefone: "81996970001",
     cadastro: "CPF",
@@ -122,7 +122,7 @@ export const cliente = [
   {
     id: 6,
     nomeReduzido: "Maxwell",
-    nomeCompleto: "Arthur Soares de Moraes",
+    nomeCompleto: "Maxwell Almeida Avelino",
     email: "novasafra.fiscal@gmail.com",
     telefone: "81996970001",
     cadastro: "CPF",
@@ -142,5 +142,5 @@ export const cliente = [
       logradouro: "Sítio Passagem, s/n - Zona Rural",
     },
     prazo: "25",
-  }
+  },
 ];

@@ -45,16 +45,23 @@ export const filtrarContratos = (nome, contrato, produto) => {
     });
   }
   contratos = contratos.filter((contrato) => {
-    if (produto === ""){
-      return contrato
-    }
-    else {
+    if (produto === "") {
+      return contrato;
+    } else {
       if (contrato.produto === produto) {
-        return contrato
+        return contrato;
       }
     }
-  })
+  });
 
   return contratos;
 };
 
+export const filtrarCliente = (nome, lista) => {
+  let cliente = lista.find((cliente) => cliente.nomeReduzido === nome);
+  if (cliente === undefined) {
+    return (cliente = lista[0]);
+  }
+
+  return cliente;
+};

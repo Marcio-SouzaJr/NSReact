@@ -24,7 +24,7 @@ const Selection = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2" id="fornecedores">
           <div className="option text-white rounded ">
-          <Link to={"/fornecedores"}>
+            <Link to={"/fornecedores"}>
               <div className="option-overlay"></div>
             </Link>
             <div className="option-content px-3 py-4">
@@ -40,7 +40,7 @@ const Selection = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2" id="vendas">
           <div className="option text-white rounded">
-          <Link to={"/vendas"}>
+            <Link to={"/vendas"}>
               <div className="option-overlay"></div>
             </Link>
             <div className="option-content px-3 py-4">
@@ -55,7 +55,7 @@ const Selection = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2">
           <div className="option text-white rounded" id="embarques">
-          <Link to={"/embarques"}>
+            <Link to={"/embarques"}>
               <div className="option-overlay"></div>
             </Link>
             <div className="option-content px-3 py-4">
@@ -70,7 +70,7 @@ const Selection = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2">
           <div className="option text-white rounded">
-          <Link to={"/saldos"}>
+            <Link to={"/saldos"}>
               <div className="option-overlay"></div>
             </Link>
             <div className="option-content px-3 py-4">
@@ -85,7 +85,9 @@ const Selection = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2">
           <div className="option text-white rounded">
-            <div className="option-overlay"></div>
+            <Link to={"/relatorios"}>
+              <div className="option-overlay"></div>
+            </Link>
             <div className="option-content px-3 py-4">
               <h3 className="hover-1-title text-uppercase font-weight-bold mb-0">
                 Relatorios
