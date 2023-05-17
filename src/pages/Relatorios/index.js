@@ -23,7 +23,7 @@ const Relatorios = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2">
           <div className="option text-white rounded">
-            <Link to={"/saldos"}>
+            <Link to={"/relatorios/vendas"}>
               <div className="option-overlay"></div>
             </Link>
             <div className="option-content px-3 py-4">
@@ -38,7 +38,9 @@ const Relatorios = () => {
         </div>
         <div className="col-sm-6 col-lg-4 pt-2">
           <div className="option text-white rounded">
-            <div className="option-overlay"></div>
+          <Link to={"/relatorios/embarques"}>
+              <div className="option-overlay"></div>
+            </Link>
             <div className="option-content px-3 py-4">
               <h3 className="hover-1-title text-uppercase font-weight-bold mb-0">
                 Embarques

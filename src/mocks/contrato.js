@@ -109,4 +109,5 @@ export const contrato = [
     preco: "1150",
     volume: 100,
   },
+  
 ];

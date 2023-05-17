@@ -11,6 +11,8 @@ import Embarques from "./pages/Embarques";
 import Saldos from "./pages/Saldos";
 import Relatorios from "./pages/Relatorios";
 import RelClientes from "./pages/RelClientes";
+import RelVendas from "./pages/RelVendas";
+import RelEmbarques from "./pages/RelEmbarques";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/saldos" element={<Saldos />} />
         <Route path="/relatorios" element={<Relatorios />} />
         <Route path="/relatorios/clientes" element={<RelClientes />} />
+        <Route path="/relatorios/vendas" element={<RelVendas />} />
+        <Route path="/relatorios/embarques" element={<RelEmbarques />} />
       </Routes>
       <Footer />
     </BrowserRouter>
