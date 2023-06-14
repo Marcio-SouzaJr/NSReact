@@ -1,64 +1,81 @@
 import { Link } from "react-router-dom";
+import logoColor from "../../assets/logo-color.png"
+import logoWhite from "../../assets/logo-white.png"
 
 const Home = () => {
   return (
     <>
-      <div className="container-fluid mt-3 d-flex align-items-center page-base px-5">
-        <div className="row gx-lg-5 col-12 mx-2">
-          <div className="col-lg-6 mb-5 ">
-            <h1 className="my-5 display-3 fw-bold titulo">
-              Nova Safra <br />
-              <span className="display-6 text-dark">Agronegocios</span>
-            </h1>
-            <p>
-              Sistema de Gerenciamento de clientes, contratos e saldos internos
-              da Nova Safra Agronegocios.
-            </p>
+      <div class="home-base">
+        <div class="home-center d-flex justify-content-center align-items-center">
+          <div
+            id="left"
+            class="inner-center col-6 rounded-start d-none d-lg-block"
+          >
+            <div class="hero-image">
+              <div class="hero-overlay">
+                <div class="position-absolute top-0 start-50 translate-middle-x hero-logo pt-5">
+                  <img id="home-logo-lg" src={logoWhite} alt="123165" />
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div className="col-lg-6 mb-5 mb-lg-0">
-            <div className="card shadow p-3 mb-2 bg-body-tertiary rounded">
-              <div className="card-body py-5 px-md-5">
-                <form>
-                  <div className="form-outline mb-4">
-                    <input type="email" id="email" className="form-control " />
-                    <label className="form-label " htmlFor="email">
-                      E-mail{" "}
-                    </label>
-                  </div>
-
-                  <div className="form-outline mb-4">
-                    <input
-                      type="password"
-                      id="senha"
-                      className="form-control"
-                    />
-                    <label className="form-label" htmlFor="senha">
-                      Senha
-                    </label>
-                  </div>
-
-                  <div className="form-check d-flex justify-content-center mb-4">
-                    <input
-                      className="form-check-input me-2"
-                      type="checkbox"
-                      value=""
-                      id="lembrar"
-                      checked
-                    />
-                    <label className="form-check-label" htmlFor="lembrar">
-                      Lembrar os meus dados
-                    </label>
-                  </div>
-                  <Link to={"/selection"}>
-                    <button
-                      type="submit"
-                      className=" botao btn-block mb-4 position-absolute bottom-0 start-50 translate-middle-x"
-                    >
-                      Login
-                    </button>
-                  </Link>
-                </form>
+          <div
+            id="right"
+            class="inner-center col-12 col-lg-6 rounded-end d-flex flex-column align-items-center justify-content-center bg-white"
+          >
+            <div class=" d-lg-none pt-4">
+              <img
+                id="home-logo-sm"
+                src={logoColor}
+                alt="Logo color small"
+              />
+            </div>
+            <div class="pt-2 mb-3">
+              <h1>Login</h1>
+            </div>
+            <div class="form col-8 mt-5 mb-2">
+              <input
+                type="email"
+                id="email"
+                class="form-control input-color"
+                placeholder="Email@email.com"
+              />
+            </div>
+            <div class="form col-8 mb-5">
+              <input
+                type="password"
+                id="senha"
+                class="form-control input-color"
+                placeholder="Senha"
+              />
+              <p class="text-center">
+                Esqueceu a sua senha? clique{" "}
+                <span class="text-primary fw-bolder">aqui!</span>
+              </p>
+            </div>
+            <Link to={"/selection"}>
+            <button type="button" class="botao btn btn-primary mb-5">
+              Entrar
+            </button>
+            </Link>
+            <div class="d-flex justify-content-center align-items-center">
+              <div>
+                <button class="contact me-3" onClick={() => window.location.href = 'mailto:novasafra.fiscal@gmail.com'}>
+                  <img
+                    id="gmail-logo"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png"
+                    alt=""
+                  />
+                </button>
+              </div>
+              <div>
+                <button class="contact" onClick={() => window.location.href = 'https://wa.me/5581996970001'}>
+                  <img
+                    id="whatsapp-logo"
+                    src="https://www.dsmeletro.com/wp-content/uploads/2020/04/whatsapp-icon-transparent-png-6.png"
+                    alt=""
+                  />
+                </button>
               </div>
             </div>
           </div>
