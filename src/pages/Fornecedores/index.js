@@ -1,3 +1,4 @@
+import { ArrowRightCircleFill } from "react-bootstrap-icons";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 
@@ -5,36 +6,24 @@ const Fornecedores = () => {
   return (
     <>
       <Navbar />
-      <div className=" d-flex flex-column flex-lg-row justify-content-around align-items-center container-fluid py-2 m-0 page-base">
-        <div className="col-12 col-sm-6 col-lg-5 pt-2">
-          <div className="option text-white rounded">
-          <Link to={"/fornecedores/fabricas"}>
-              <div className="option-overlay"></div>
-            </Link>
-            
-            <div className="option-content px-3 py-4">
-              <h3 className="hover-1-title text-uppercase font-weight-bold mb-0">
-                Fabricas
-              </h3>
-              <p className="option-description font-weight-light mb-0">
-                Cadastrar Fabricas/Empresas como fornecedoras.
-              </p>
+      <div class="selection-base d-flex flex-column mt-1 py-5 justify-content-center">
+        <div class="row d-flex justify-content-center ">
+          <div id="opcao" class="option card col-6 col-xl-3 m-5 mt-5">
+            <div id="opcao" class="card-body">
+              <h5 class="card-title">Fabricas</h5>
+              <p class="card-text">Cadastrar novas fabricas.</p>
+              <Link to={"/fornecedores/fabricas"}>
+                <ArrowRightCircleFill className="seta position-absolute bottom-0 end-0 me-1 mb-1" />
+              </Link>
             </div>
           </div>
-        </div>
-
-        <div className="col-12 col-sm-6 col-lg-5 pt-2">
-          <div className="option text-white rounded">
-          <Link to={"/fornecedores/produtos"}>
-              <div className="option-overlay"></div>
-            </Link>
-            <div className="option-content px-3 py-4">
-              <h3 className="hover-1-title text-uppercase font-weight-bold mb-0">
-                Produto
-              </h3>
-              <p className="option-description font-weight-light mb-0">
-                Cadastrar novo produto vendido.
-              </p>
+          <div id="opcao" class="option card col-6 col-xl-3 m-5 mt-5">
+            <div class="card-body">
+              <h5 class="card-title">Produtos</h5>
+              <p class="card-text">Cadastrar novos produtos.</p>
+              <Link to={"/fornecedores/produtos"}>
+                <ArrowRightCircleFill className="seta position-absolute bottom-0 end-0 me-1 mb-1" />
+              </Link>
             </div>
           </div>
         </div>
