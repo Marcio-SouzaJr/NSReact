@@ -1,28 +1,17 @@
+import logoLogo from "../assets/logo-color-logo.png";
+
 const Navbar = () => {
   return (
-    <nav className="navbar bg-body-tertiary footer p-0">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="/">
-          <img
-            src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/256/external-leaf-agriculture-and-farmer-kiranshastry-lineal-color-kiranshastry.png"
-            alt="Logo"
-            width="30"
-            height="30"
-            classNmae="d-inline-block align-text-top"
-          />
-          Nova Safra
-        </a>
-        <a className="" href="/">
-          <img
-            src="https://w7.pngwing.com/pngs/722/101/png-transparent-computer-icons-user-profile-circle-abstract-miscellaneous-rim-account.png"
-            alt="Logo"
-            width="38"
-            height="30"
-            className="d-inline-block align-text-top"
-          />
-        </a>
-      </div>
-    </nav>
+    <nav id="navbar" class="container-fluid d-flex border-bottom">
+    <img src={logoLogo}  alt="logo" srcset="" id="navbar-logo" />
+    <div id="navbar-links" class="container-fluid d-flex justify-content-around my-auto">
+      <a href="/" class="navbar-link">Cliente</a>
+      <a href="/" class="navbar-link">Fornecedores</a>
+      <a href="/" class="navbar-link">Embarques</a>
+      <a href="/" class="navbar-link">Saldos</a>
+      <a href="/" class="navbar-link">Relatorios</a>
+    </div>
+  </nav>
   );
 };
 

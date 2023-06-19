@@ -11,41 +11,32 @@ const Clientes = () => {
     }
   };
 
+  const sucesso = () => {
+    alert("cliente cadastrado com sucesso")
+  }
   return (
     <>
       <Navbar />
       <div className="row container-fluid py-2 m-0 page-base-form">
-        <div className="py-5 text-center ">
-          <img
-            className="d-block mx-auto mb-4"
-            src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/256/external-leaf-agriculture-and-farmer-kiranshastry-lineal-color-kiranshastry.png"
-            alt="logo nova safra"
-            width="72"
-          />
-          <h2>Cadastro de Clientes</h2>
-          <p className="lead">
-            Cadastro de novos clientes, dados para serem usados na elaboração de
-            contratos e acompanhamentos de saldos e embarques
-          </p>
-        </div>
         <div className="row">
           <div className="col-md-7 m-auto bg-white card shadow p-3 mb-2 rounded">
+            <h1 className="m-auto mb-5">Novo Cliente</h1>
             <h4 className="mb-3">Dados Cadastrais</h4>
             <form noValidate>
               <div className="row">
                 <div className="col-md-2 mb-3">
-                  <label for="id">ID</label>
+                  <label htmlFor="id">ID</label>
                   <input
                     type="text"
                     className="form-control text-center"
                     id="id"
                     placeholder="120"
-                    value=""
+                    defaultValue=""
                     disabled
                   />
                 </div>
                 <div className="col-md-10 mb-3">
-                  <label for="nome">Nome Reduzido</label>
+                  <label htmlFor="nome">Nome Reduzido</label>
                   <input
                     type="text"
                     className="form-control"
@@ -56,7 +47,7 @@ const Clientes = () => {
                 </div>
               </div>
               <div className="mb-3">
-                <label for="nome-completo">Nome Completo</label>
+                <label htmlFor="nome-completo">Nome Completo</label>
                 <div className="input-group">
                   <div className="input-group-prepend"></div>
                   <input
@@ -69,7 +60,7 @@ const Clientes = () => {
                 </div>
               </div>
               <div className="mb-3">
-                <label for="email">E-mail</label>
+                <label htmlFor="email">E-mail</label>
                 <input
                   type="email"
                   className="form-control"
@@ -78,7 +69,7 @@ const Clientes = () => {
                 />
               </div>
               <div className="mb-4">
-                <label for="telefone">
+                <label htmlFor="telefone">
                   Telefone<span className="text-muted"> (somente numeros)</span>
                 </label>
                 <input
@@ -100,7 +91,7 @@ const Clientes = () => {
                       checked
                       required
                     />
-                    <label className="custom-control-label ps-1" for="cpf">
+                    <label className="custom-control-label ps-1" htmlFor="cpf">
                       CPF
                     </label>
                   </div>
@@ -112,7 +103,7 @@ const Clientes = () => {
                       className="custom-control-input"
                       required
                     />
-                    <label className="custom-control-label ps-1" for="cnpj">
+                    <label className="custom-control-label ps-1" htmlFor="cnpj">
                       CNPJ
                     </label>
                   </div>
@@ -126,7 +117,7 @@ const Clientes = () => {
               </div>
               <div className="d-flex">
                 <div className=" col-md-3 mb-3 me-5">
-                  <label for="Inscricao">Inscrição Estadual</label>
+                  <label htmlFor="Inscricao">Inscrição Estadual</label>
                   <input
                     type="text"
                     className="form-control"
@@ -135,23 +126,20 @@ const Clientes = () => {
                   />
                 </div>
                 <div className=" col-md-3 mb-3">
-                  <label for="prazo">Prazo de pagamento</label>
-                  <select
-                    class="form-select"
-                  >
+                  <label htmlFor="prazo">Prazo de pagamento</label>
+                  <select className="form-select">
                     <option selected>Antecipado</option>
-                    <option value="7">7 dias</option>
-                    <option value="15">15 dias</option>
-                    <option value="21">21 dias</option>
-                    <option value="25">25 dias</option>
-                    <option value="28">28 dias</option>
-                    <option value="21, 25 e 28">21, 25 e 28 dias</option>
-                    
+                    <option defaultValue="7">7 dias</option>
+                    <option defaultValue="15">15 dias</option>
+                    <option defaultValue="21">21 dias</option>
+                    <option defaultValue="25">25 dias</option>
+                    <option defaultValue="28">28 dias</option>
+                    <option defaultValue="21, 25 e 28">21, 25 e 28 dias</option>
                   </select>
                 </div>
               </div>
               <hr className="mb-4" />
-              <h4 className="mb-3">Setor</h4>
+              <h4 className="mb-3">Setores</h4>
               <div className="row">
                 <div className="custom-control custom-checkbox col-md-4 mb-3">
                   <input
@@ -159,7 +147,10 @@ const Clientes = () => {
                     className="custom-control-input me-1"
                     id="frango-corte"
                   />
-                  <label className="custom-control-label" for="frango-corte">
+                  <label
+                    className="custom-control-label"
+                    htmlFor="frango-corte"
+                  >
                     Frango de Corte
                   </label>
                 </div>
@@ -169,7 +160,10 @@ const Clientes = () => {
                     className="custom-control-input me-1"
                     id="frango-postura"
                   />
-                  <label className="custom-control-label" for="frango-postura">
+                  <label
+                    className="custom-control-label"
+                    htmlFor="frango-postura"
+                  >
                     Frango de Postura
                   </label>
                 </div>
@@ -179,7 +173,7 @@ const Clientes = () => {
                     className="custom-control-input me-1"
                     id="gado-leite"
                   />
-                  <label className="custom-control-label" for="gado-leite">
+                  <label className="custom-control-label" htmlFor="gado-leite">
                     Gado de Leite
                   </label>
                 </div>
@@ -189,7 +183,7 @@ const Clientes = () => {
                     className="custom-control-input me-1"
                     id="gado-corte"
                   />
-                  <label className="custom-control-label" for="gado-corte">
+                  <label className="custom-control-label" htmlFor="gado-corte">
                     Gado de Corte
                   </label>
                 </div>
@@ -199,7 +193,7 @@ const Clientes = () => {
                     className="custom-control-input me-1"
                     id="comercio"
                   />
-                  <label className="custom-control-label" for="comercio">
+                  <label className="custom-control-label" htmlFor="comercio">
                     Comércio
                   </label>
                 </div>
@@ -208,7 +202,7 @@ const Clientes = () => {
               <h4 className="mb-3">Endereço de Cobrança</h4>
               <div className="row">
                 <div className="col-md-4 mb-3">
-                  <label for="municipio">Municipio</label>
+                  <label htmlFor="municipio">Municipio</label>
                   <input
                     type="text"
                     className="form-control"
@@ -218,7 +212,7 @@ const Clientes = () => {
                   />
                 </div>
                 <div className="col-md-4 mb-3">
-                  <label for="estado">Estado</label>
+                  <label htmlFor="estado">Estado</label>
                   <span className="text-muted">(Abreviação)</span>
                   <input
                     type="text"
@@ -229,7 +223,7 @@ const Clientes = () => {
                   />
                 </div>
                 <div className="col-md-4 mb-3">
-                  <label for="cep">CEP</label>
+                  <label htmlFor="cep">CEP</label>
                   <input
                     type="text"
                     className="form-control"
@@ -239,7 +233,7 @@ const Clientes = () => {
                   />
                 </div>
                 <div className="col-md-12 mb-3">
-                  <label for="logradouro">Logradouro</label>
+                  <label htmlFor="logradouro">Logradouro</label>
                   <input
                     type="text"
                     className="form-control"
@@ -259,7 +253,10 @@ const Clientes = () => {
                       exibir();
                     }}
                   />
-                  <label className="custom-control-label" for="mesmo-endereco">
+                  <label
+                    className="custom-control-label"
+                    htmlFor="mesmo-endereco"
+                  >
                     Endereço de faturamento é o mesmo de cobrança
                   </label>
                 </div>
@@ -274,7 +271,7 @@ const Clientes = () => {
                   <h4 className="mb-3">Endereço de Faturamento</h4>
                   <div className="row">
                     <div className="col-md-4 mb-3">
-                      <label for="municipio">Municipio</label>
+                      <label htmlFor="municipio">Municipio</label>
                       <input
                         type="text"
                         className="form-control"
@@ -284,7 +281,7 @@ const Clientes = () => {
                       />
                     </div>
                     <div className="col-md-4 mb-3">
-                      <label for="estado">Estado</label>
+                      <label htmlFor="estado">Estado</label>
                       <span className="text-muted">(Abreviação)</span>
                       <input
                         type="text"
@@ -295,7 +292,7 @@ const Clientes = () => {
                       />
                     </div>
                     <div className="col-md-4 mb-3">
-                      <label for="cep">CEP</label>
+                      <label htmlFor="cep">CEP</label>
                       <input
                         type="text"
                         className="form-control"
@@ -305,7 +302,7 @@ const Clientes = () => {
                       />
                     </div>
                     <div className="col-md-12 mb-3">
-                      <label for="logradouro">Logradouro</label>
+                      <label htmlFor="logradouro">Logradouro</label>
                       <input
                         type="text"
                         className="form-control"
@@ -323,6 +320,7 @@ const Clientes = () => {
                 <button
                   className="btn btn-primary btn-lg btn-block px-5"
                   type="submit"
+                  onClick={sucesso}
                 >
                   Cadastrar
                 </button>

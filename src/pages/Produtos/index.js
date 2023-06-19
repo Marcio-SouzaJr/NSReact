@@ -4,23 +4,10 @@ const Produtos = () => {
   return (
     <>
       <Navbar />
-      <div className="row container-fluid py-2 m-0 page-base-form">
-        <div className="py-5 text-center">
-          <img
-            className="d-block mx-auto mb-4"
-            src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/256/external-leaf-agriculture-and-farmer-kiranshastry-lineal-color-kiranshastry.png"
-            alt="logo nova safra"
-            width="72"
-          />
-          <h2>Cadastro de Produtos</h2>
-          <p className="lead">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim ullam
-            corporis quod magni maxime similique rem necessitatibus quam nemo
-            harum?
-          </p>
-        </div>
-        <div className="row">
+      <div className="row container-fluid pt-5 pb-5 m-0 page-base-form">
+        <div className="row pb-5">
           <div className="col-md-7 m-auto bg-white card shadow p-3 mb-3  rounded">
+          <h1 className="m-auto mb-5">Novo Produto</h1>
             <h4 className="mb-3">Dados Cadastrais</h4>
             <form className="needs-validation" novalidate>
               <div className="row">

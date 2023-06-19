@@ -5,23 +5,10 @@ const Vendas = () => {
     <>
       <Navbar />
 
-      <div className="row container-fluid py-2 m-0 page-base-form">
-        <div className="py-5 text-center">
-          <img
-            className="d-block mx-auto mb-4"
-            src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/256/external-leaf-agriculture-and-farmer-kiranshastry-lineal-color-kiranshastry.png"
-            alt="logo nova safra"
-            width="72"
-          />
-          <h2>Cadastro de Vendas</h2>
-          <p className="lead">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim ullam
-            corporis quod magni maxime similique rem necessitatibus quam nemo
-            harum?
-          </p>
-        </div>
-        <div className="row">
-          <div className="col-md-7 m-auto bg-white card shadow p-3 mb-2  rounded">
+      <div className="row container-fluid py-5 m-0 page-base-form">
+        <div className="row pt-4 pb-5">
+          <div className="col-md-7 m-auto bg-white card shadow p-3 mb-2 rounded">
+          <h1 className="m-auto mb-5">Nova Venda</h1>
             <h4 className="mb-3">Dados da Venda</h4>
             <form className="needs-validation" novalidate>
               <div className="row align-items-center">
