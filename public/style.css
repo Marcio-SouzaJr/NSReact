@@ -2,7 +2,6 @@
   --primaria: #037514;
 }
 
-
 #navbar {
   height: 45px;
   background-color: #f5f5f5;
@@ -12,24 +11,45 @@
   height: 40px;
 }
 
-.navbar-link{
+.navbar-link {
   color: black;
   text-decoration: none;
   font-weight: 600;
 }
 
-.navbar-link:hover{
+.navbar-hamburguer {
+  display: none;
+  font-size: x-large;
+}
+
+.navbar-link:hover {
   color: rgb(5, 117, 17);
 }
 
+.hamburguer-true {
+  background-color: #f5f5f5;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hamburguer-false {
+  display: none;
+}
+
+.hamburguer-link {
+  color: black;
+  font-size: 30px;
+  height: 30px;
+  text-decoration: none;
+  font-weight: 600;
+}
 
 .footer {
   background-color: #f5f5f5;
   height: 45px;
   font-weight: 500;
-
 }
-
 
 .page-base {
   height: 90vh;
@@ -60,8 +80,6 @@
   height: 100%;
 }
 
-
-
 .hero-image {
   background-image: url("https://media.istockphoto.com/id/506164764/pt/foto/trator-pulveriza%C3%A7%C3%A3o-de-soja-campo.jpg?b=1&s=612x612&w=0&k=20&c=1uxNDpkDPveF4HuYplH5W_S_mQrQiU4NfR2B5qhvpRo=");
   background-color: #037514;
@@ -81,16 +99,15 @@
   border-bottom-left-radius: 10px;
 }
 
-#home-logo-sm{
+#home-logo-sm {
   width: 160px;
   height: 160px;
 }
 
-#home-logo-lg{
+#home-logo-lg {
   width: 280px;
   height: 280px;
 }
-
 
 .input-color {
   background-color: #f7f7f7;
@@ -106,27 +123,19 @@
   background-color: white;
 }
 
-#gmail-logo{
+#gmail-logo {
   width: 25px;
 }
 
-#whatsapp-logo{
+#whatsapp-logo {
   width: 28px;
 }
 
-
 /* inicio pagina de seleção */
-
 
 .selection-base {
   background-color: #f7f7f7;
   height: 88vh;
-}
-
-@media screen and (max-width: 1200px){
-  .selection-base {
-    height: 100%;
-  }
 }
 
 .seta {
@@ -140,12 +149,32 @@
   transition: all 0.5s;
 }
 
-#opcao{
+#opcao {
   height: 180px;
 }
 
 .option:hover {
   box-shadow: 8px 7px 68px -40px rgb(2, 109, 2);
   transition: all 0.5s;
-  
+}
+
+/* media queries */
+
+@media screen and (max-width: 1200px) {
+  .selection-base {
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .navbar-link {
+    display: none;
+  }
+
+  .navbar-hamburguer {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
