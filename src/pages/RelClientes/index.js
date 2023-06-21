@@ -23,7 +23,8 @@ const RelClientes = () => {
   return (
     <>
       <Navbar />
-      <div className=" row py-4 px-5 d-flex justify-content-center">
+    <div className="table-base">
+    <div className=" row py-4 px-5 d-flex justify-content-center container-fluid">
         <div className="col-6">
           <select className="form-select" onChange={(e) => {setNomeSelecionado(e.target.value)}}>
             {clientes.sort()?.map((clientes, index) => {
@@ -96,6 +97,7 @@ const RelClientes = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </>
   );
 };

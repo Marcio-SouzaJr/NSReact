@@ -41,7 +41,8 @@ const Saldos = () => {
   return (
     <>
       <Navbar />
-      <div className=" row py-4 px-3 d-flex align-items-around">
+    <div className="table-base">
+    <div className=" row py-4 px-3 d-flex align-items-around container-fluid ">
         <div className="col-6">
           <select
             className="form-select"
@@ -74,7 +75,7 @@ const Saldos = () => {
           </select>
         </div>
       </div>
-      <div className="row mx-3 mb-2 border shadow ">
+      <div className="row mx-3 mb-2 border shadow table-responsive">
         <table className="table table-striped table-hover">
           <thead>
             <tr>
@@ -104,35 +105,31 @@ const Saldos = () => {
           </tbody>
         </table>
       </div>
-      <div className="d-flex justify-content-around mb-3">
-        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
+      <div className="d-flex flex-column flex-md-row justify-content-around mb-3">
+        <div className="card card-total border-2 col-sm-12 col-md-2 my-2 mx-1">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja:  ${
               totais[0] + totais[1] + totais[2]
             }T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
-          <div className="card-body">
-            <h5 className="card-title">{`Total Farelo de Soja 45%: ${totais[0]}T `}</h5>
+        <div className="card card-total border-2 col-sm-12 col-md-2 my-2 mx-1">
+          <div className="card-body card-saldo">
+            <h5 className="card-title">{`Total Farelo de Soja Granel: ${totais[0] + totais[1]}T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
-          <div className="card-body">
-            <h5 className="card-title">{`Total Farelo de Soja 46%:  ${totais[1]}T `}</h5>
-          </div>
-        </div>
-        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
+        <div className="card card-total border-2 col-sm-12 col-md-2 my-2 mx-1">
           <div className="card-body">
             <h5 className="card-title">{`Total Farelo de Soja Ensacado:  ${totais[2]}T `}</h5>
           </div>
         </div>
-        <div className="card border-2 col-xm-6 col-lg-2 shadow-sm">
+        <div className="card card-total border-2 col-sm-12 col-md-2 my-2 mx-1">
           <div className="card-body">
             <h5 className="card-title">{`Total Casca:  ${totais[3]}T `}</h5>
           </div>
         </div>
       </div>
+    </div>
     </>
   );
 };

@@ -131,6 +131,17 @@
   width: 28px;
 }
 
+
+.table-base{
+  height: 100%;
+}
+
+.card-total:hover{
+  box-shadow: 8px 7px 68px -40px rgb(2, 109, 2);
+  transition: all 0.5s;
+}
+
+
 /* inicio pagina de seleção */
 
 .selection-base {
@@ -148,6 +159,8 @@
   font-size: 36px;
   transition: all 0.5s;
 }
+
+
 
 #opcao {
   height: 180px;

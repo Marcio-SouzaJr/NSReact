@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer id="sticky-footer" className=" pb-3 pt-1 footer container-fluid ">
+    <footer id="sticky-footer" className=" pb-3 pt-1 footer container-fluid">
       <div className=" text-center text-muted">
         <small>Copyright &copy; Nova Safra Agronegócios / Developed by Márcio Souza</small>
       </div>

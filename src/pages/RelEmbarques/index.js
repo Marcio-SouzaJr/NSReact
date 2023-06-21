@@ -7,22 +7,8 @@ const RelVendas = () => {
   return (
     <>
       <Navbar />
-      <div className=" row py-4 px-5 d-flex justify-content-center">
-        <div className="col-6">
-          {/* <select
-            className="form-select"
-          >
-            {clientes.sort()?.map((clientes, index) => {
-              return (
-                <option value={clientes} key={clientes} index={index}>
-                  {clientes}
-                </option>
-              );
-            })}
-          </select> */}
-        </div>
-      </div>
-      <div className="row mx-3 border shadow">
+    <div className="table-base">
+    <div className="row mx-3 border shadow mt-5">
         <table className="table table-striped table-bordered table-hover">
           <thead>
             <tr>
@@ -50,6 +36,7 @@ const RelVendas = () => {
           </tbody>
         </table>
       </div>
+    </div>
     </>
   );
 };
