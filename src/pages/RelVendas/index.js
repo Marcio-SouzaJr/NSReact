@@ -4,23 +4,34 @@ import { contrato } from "../../mocks/contrato";
 const RelVendas = () => {
     
   const contratos = contrato;
+  const dias = Array.from({length: 31}, (_, i) => i + 1)
+  const meses = Array.from({length: 12}, (_, i) => i + 1)
 
   return (
     <>
       <Navbar />
       <div className=" row py-4 px-5 d-flex justify-content-center">
-        <div className="col-6">
-          {/* <select
-            className="form-select"
-          >
-            {clientes.sort()?.map((clientes, index) => {
-              return (
-                <option value={clientes} key={clientes} index={index}>
-                  {clientes}
+      <div className="col-6">
+          <select>
+          <option value={""}>Dia</option>
+          {dias.map((dia, index) => {
+            return (
+              <option value={dia} key={dia} index={index}>
+                  {dia}
                 </option>
-              );
-            })}
-          </select> */}
+            )
+          })}
+          </select>
+          <select>
+          <option value={""}>Mes</option>
+          {meses.map((mes, index) => {
+            return (
+              <option value={mes} key={mes} index={index}>
+                  {mes}
+                </option>
+            )
+          })}
+          </select>
         </div>
       </div>
       <div className="row mx-3 border shadow">
