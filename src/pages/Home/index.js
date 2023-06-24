@@ -1,8 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoColor from "../../assets/logo-color.png";
 import logoWhite from "../../assets/logo-white.png";
+import { useContext, useState } from "react";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Home = () => {
+  const [err, setErr] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        dispatch({ type: "LOGIN", payload: user });
+        navigate("/selection");
+      })
+      .catch((error) => {
+        console.log(error);
+        setErr(true);
+      });
+  };
+
   return (
     <>
       <div className="home-base">
@@ -35,6 +59,7 @@ const Home = () => {
                 id="email"
                 className="form-control input-color"
                 placeholder="Email@email.com"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="form col-8 mb-5">
@@ -43,19 +68,25 @@ const Home = () => {
                 id="senha"
                 className="form-control input-color"
                 placeholder="Senha"
+                onChange={(e) => setPassword(e.target.value)}
               />
+              {err && (
+                <span className="login-error">Login e/ou senha incorretos</span>
+              )}
               <p className="text-center">
                 Esqueceu a sua senha? clique{" "}
                 <Link to={"https://wa.me/5581996970001"}>
-                <span className="text-primary fw-bolder">aqui!</span>
+                  <span className="text-primary fw-bolder">aqui!</span>
                 </Link>
               </p>
             </div>
-            <Link to={"/selection"}>
-              <button type="button" className="botao btn btn-primary mb-5">
-                Entrar
-              </button>
-            </Link>
+            <button
+              type="button"
+              className="botao btn btn-primary mb-5"
+              onClick={handleLogin}
+            >
+              Entrar
+            </button>
             <div className="d-flex justify-content-center align-items-center">
               <div>
                 <button

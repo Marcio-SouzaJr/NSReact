@@ -131,6 +131,11 @@
   width: 28px;
 }
 
+.login-error{
+  color: red;
+  font-weight: bold;
+}
+
 
 .table-base{
   height: 100%;
