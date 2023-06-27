@@ -1,8 +1,49 @@
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
+import { doc, getDoc, increment, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Clientes = () => {
+  const [clienteId, setClienteId] = useState("");
   const [mesmoEndereco, setMesmoEndereco] = useState(false);
+  const [nomeReduzido, setNomeReduzido] = useState("");
+  const [nomeCompleto, setNomeCompleto] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [documento, setDocumento] = useState("");
+  const [inscricao, setInscricao] = useState("");
+  const [prazo, setPrazo] = useState("");
+  const [process, setprocess] = useState([
+    { id: "frangoCorte", name: "Frango de corte", status: false },
+    { id: "frangoPostura", name: "Frango de postura", status: false },
+    { id: "gadoLeite", name: "Gado de leite", status: false },
+    { id: "gadoCorte", name: "Gado de corte", status: false },
+    { id: "comercio", name: "Comercio", status: false },
+  ]);
+  const [setor, setSetor] = useState([]);
+  const [municipio, setMunicipio] = useState("");
+  const [estado, setEstado] = useState("");
+  const [cep, setCep] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [municipioFaturamento, setMunicipioFaturamento] = useState("");
+  const [estadoFaturamento, setEstadoFaturamento] = useState("");
+  const [cepFaturamento, setCepFaturamento] = useState("");
+  const [logradouroFaturamento, setLogradouroFaturamento] = useState("");
+  const navigate = useNavigate();
+  const contador = doc(db, "Clientes", "contador");
+  const docSnap = getDoc(contador);
+  const getId = async () => {
+    if (docSnap) {
+      const id = (await docSnap).data().contagem;
+      setClienteId(id);
+    } else {
+      console.log("No such document!");
+    }
+  };
+
+  getId();
+
   const exibir = () => {
     if (mesmoEndereco) {
       return setMesmoEndereco(false);
@@ -11,9 +52,48 @@ const Clientes = () => {
     }
   };
 
-  const sucesso = () => {
-    alert("cliente cadastrado com sucesso")
-  }
+  const handleCheck = (id) => {
+    setprocess(
+      process.map((item) =>
+        item.id === id ? { ...item, status: !item.status } : item
+      )
+    );
+    setSetor(
+      process.filter((item) => {
+        return item.status === true;
+      })
+    );
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      await setDoc(doc(db, "Clientes", `${clienteId}`), {
+        nomeReduzido,
+        nomeCompleto,
+        email,
+        telefone,
+        documento,
+        inscricao,
+        prazo,
+        setor,
+        municipio,
+        estado,
+        cep,
+        logradouro,
+        municipioFaturamento,
+        estadoFaturamento,
+        cepFaturamento,
+        logradouroFaturamento,
+      });
+      alert("Cliente Cadastrado com Sucesso");
+      updateDoc(contador, { contagem: increment(1) });
+      navigate("/selection");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -30,8 +110,8 @@ const Clientes = () => {
                     type="text"
                     className="form-control text-center"
                     id="id"
-                    placeholder="120"
-                    defaultValue=""
+                    placeholder={clienteId}
+                    defaultValue={clienteId}
                     disabled
                   />
                 </div>
@@ -42,8 +122,8 @@ const Clientes = () => {
                     className="form-control"
                     id="nome"
                     placeholder="Nome Reduzido"
+                    onChange={(e) => setNomeReduzido(e.target.value)}
                   />
-                  <div className="invalid-feedback">Nome invalido</div>
                 </div>
               </div>
               <div className="mb-3">
@@ -55,7 +135,7 @@ const Clientes = () => {
                     className="form-control"
                     id="nome-completo"
                     placeholder="Nome do CPF ou CNPJ"
-                    required
+                    onChange={(e) => setNomeCompleto(e.target.value)}
                   />
                 </div>
               </div>
@@ -66,6 +146,7 @@ const Clientes = () => {
                   className="form-control"
                   id="email"
                   placeholder="email@exemplo.com"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-4">
@@ -77,7 +158,7 @@ const Clientes = () => {
                   className="form-control"
                   id="telefone"
                   placeholder="81999999999"
-                  required
+                  onChange={(e) => setTelefone(e.target.value)}
                 />
               </div>
               <div className="input-group mb-3">
@@ -89,7 +170,6 @@ const Clientes = () => {
                       type="radio"
                       className="custom-control-input"
                       checked
-                      required
                     />
                     <label className="custom-control-label ps-1" htmlFor="cpf">
                       CPF
@@ -101,7 +181,6 @@ const Clientes = () => {
                       name="documento"
                       type="radio"
                       className="custom-control-input"
-                      required
                     />
                     <label className="custom-control-label ps-1" htmlFor="cnpj">
                       CNPJ
@@ -113,6 +192,7 @@ const Clientes = () => {
                   className="form-control"
                   aria-label="Text input with radio button"
                   placeholder="Somente numeros"
+                  onChange={(e) => setDocumento(e.target.value)}
                 />
               </div>
               <div className="d-flex">
@@ -123,11 +203,15 @@ const Clientes = () => {
                     className="form-control"
                     id="Inscricao"
                     placeholder="99999999"
+                    onChange={(e) => setInscricao(e.target.value)}
                   />
                 </div>
                 <div className=" col-md-3 mb-3">
                   <label htmlFor="prazo">Prazo de pagamento</label>
-                  <select className="form-select">
+                  <select
+                    className="form-select"
+                    onChange={(e) => setPrazo(e.target.value)}
+                  >
                     <option selected>Antecipado</option>
                     <option defaultValue="7">7 dias</option>
                     <option defaultValue="15">15 dias</option>
@@ -141,62 +225,26 @@ const Clientes = () => {
               <hr className="mb-4" />
               <h4 className="mb-3">Setores</h4>
               <div className="row">
-                <div className="custom-control custom-checkbox col-md-4 mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input me-1"
-                    id="frango-corte"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor="frango-corte"
-                  >
-                    Frango de Corte
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox col-md-4 mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input me-1"
-                    id="frango-postura"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor="frango-postura"
-                  >
-                    Frango de Postura
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox col-md-4 mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input me-1"
-                    id="gado-leite"
-                  />
-                  <label className="custom-control-label" htmlFor="gado-leite">
-                    Gado de Leite
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox col-md-4 mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input me-1"
-                    id="gado-corte"
-                  />
-                  <label className="custom-control-label" htmlFor="gado-corte">
-                    Gado de Corte
-                  </label>
-                </div>
-                <div className="custom-control custom-checkbox col-md-4 mb-3">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input me-1"
-                    id="comercio"
-                  />
-                  <label className="custom-control-label" htmlFor="comercio">
-                    Comércio
-                  </label>
-                </div>
+                {process.map((item) => {
+                  const { id, name, status } = item;
+                  return (
+                    <>
+                      <div
+                        key={id}
+                        className="custom-control custom-checkbox col-md-4 mb-3"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={status}
+                          onClick={() => handleCheck(id)}
+                        />
+                        <label className="custom-control-label" htmlFor={id}>
+                          {name}
+                        </label>
+                      </div>
+                    </>
+                  );
+                })}
               </div>
               <hr className="mb-4" />
               <h4 className="mb-3">Endereço de Cobrança</h4>
@@ -208,7 +256,7 @@ const Clientes = () => {
                     className="form-control"
                     id="municipio"
                     placeholder="Municipio"
-                    required
+                    onChange={(e) => setMunicipio(e.target.value)}
                   />
                 </div>
                 <div className="col-md-4 mb-3">
@@ -219,7 +267,7 @@ const Clientes = () => {
                     className="form-control"
                     id="estado"
                     placeholder="PE"
-                    required
+                    onChange={(e) => setEstado(e.target.value)}
                   />
                 </div>
                 <div className="col-md-4 mb-3">
@@ -229,7 +277,7 @@ const Clientes = () => {
                     className="form-control"
                     id="cep"
                     placeholder="00000000"
-                    required
+                    onChange={(e) => setCep(e.target.value)}
                   />
                 </div>
                 <div className="col-md-12 mb-3">
@@ -239,7 +287,7 @@ const Clientes = () => {
                     className="form-control"
                     id="logradouro"
                     placeholder="Sitio Granja Nova Safra"
-                    required
+                    onChange={(e) => setLogradouro(e.target.value)}
                   />
                 </div>
                 <div className="custom-control custom-checkbox col-md-10 mb-2">
@@ -248,8 +296,6 @@ const Clientes = () => {
                     className="custom-control-input me-1"
                     id="mesmo-endereco"
                     onChange={() => {
-                      console.log("clicou");
-                      console.log(mesmoEndereco);
                       exibir();
                     }}
                   />
@@ -277,7 +323,9 @@ const Clientes = () => {
                         className="form-control"
                         id="municipio"
                         placeholder="Municipio"
-                        required
+                        onChange={(e) =>
+                          setMunicipioFaturamento(e.target.value)
+                        }
                       />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -288,7 +336,7 @@ const Clientes = () => {
                         className="form-control"
                         id="estado"
                         placeholder="PE"
-                        required
+                        onChange={(e) => setEstadoFaturamento(e.target.value)}
                       />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -298,7 +346,7 @@ const Clientes = () => {
                         className="form-control"
                         id="cep"
                         placeholder="00000000"
-                        required
+                        onChange={(e) => setCepFaturamento(e.target.value)}
                       />
                     </div>
                     <div className="col-md-12 mb-3">
@@ -308,7 +356,9 @@ const Clientes = () => {
                         className="form-control"
                         id="logradouro"
                         placeholder="Sitio Granja Nova Safra"
-                        required
+                        onChange={(e) =>
+                          setLogradouroFaturamento(e.target.value)
+                        }
                       />
                     </div>
                   </div>
@@ -320,7 +370,7 @@ const Clientes = () => {
                 <button
                   className="btn btn-primary btn-lg btn-block px-5"
                   type="submit"
-                  onClick={sucesso}
+                  onClick={handleClick}
                 >
                   Cadastrar
                 </button>
