@@ -1,6 +1,50 @@
 import Navbar from "../../components/Navbar";
+import { Timestamp, doc, getDoc, increment, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Embarques = () => {
+  const [emabrqueId, setEmbarqueId] = useState("");
+  const [cliente, setCliente] = useState("");
+  const [contrato, setContrato] = useState("");
+  const [volume, setVolume] = useState("");
+  const [placa, setPlaca] = useState("");
+  const [nf, setNf] = useState("");
+  const [data, setData] = useState("");
+  const navigate = useNavigate();
+  const contador = doc(db, "Embarques", "contador");
+  const docSnap = getDoc(contador);
+  const getId = async () => {
+    if (docSnap) {
+      const id = (await docSnap).data().contagem;
+      setEmbarqueId(id);
+    } else {
+      console.log("No such document!");
+    }
+  };
+
+  getId();
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      await setDoc(doc(db, "Embarques", `${emabrqueId}`), {
+        cliente,
+        contrato,
+        volume,
+        placa,
+        nf,
+        data,
+      });
+      alert("Cliente Cadastrado com Sucesso");
+      updateDoc(contador, { contagem: increment(1) });
+      navigate("/selection");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -14,7 +58,11 @@ const Embarques = () => {
               <div className="row align-items-center">
                 <div className="w-25 mb-3">
                   <label for="cliente">Cliente</label>
-                  <select className="form-select" id="cliente">
+                  <select
+                    className="form-select"
+                    id="cliente"
+                    onChange={(e) => setCliente(e.target.value)}
+                  >
                     <option selected>Cliente</option>
                     <option value="1">Jose de Almeida Cordeiro</option>
                     <option value="2">Plantel Agro</option>
@@ -24,7 +72,11 @@ const Embarques = () => {
                 </div>
                 <div className="w-50 mb-3">
                   <label for="contrato">Contrato</label>
-                  <select className="form-select" id="contrato">
+                  <select
+                    className="form-select"
+                    id="contrato"
+                    onChange={(e) => setContrato(e.target.value)}
+                  >
                     <option selected>Contrato</option>
                     <option value="1">
                       3160 - Plantel - Farelo Granel 45%
@@ -48,7 +100,8 @@ const Embarques = () => {
                       type="text"
                       className="form-control"
                       id="volume"
-                      placeholder="49,5"
+                      placeholder="49.5"
+                      onChange={(e) => setVolume(parseFloat(e.target.value))}
                     />
                     <span className="input-group-text" id="basic-addon3">
                       T
@@ -64,6 +117,7 @@ const Embarques = () => {
                     className="form-control text-center"
                     id="placa"
                     placeholder="Placa"
+                    onChange={(e) => setPlaca(e.target.value)}
                   />
                 </div>
                 <div className="w-50 mb-3">
@@ -73,11 +127,17 @@ const Embarques = () => {
                     className="form-control text-center"
                     id="nf"
                     placeholder="166591"
+                    onChange={(e) => setNf(e.target.value)}
                   />
                 </div>
                 <div className="w-25 mb-3">
                   <label for="contrato">Data</label>
-                  <input type="date" className="form-control" id="data" />
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="data"
+                    onChange={(e) => setData(Timestamp.fromDate(new Date(e.target.value)))}
+                  />
                 </div>
               </div>
 
@@ -85,6 +145,7 @@ const Embarques = () => {
                 <button
                   className="btn btn-primary btn-lg btn-block px-5"
                   type="submit"
+                  onClick={handleClick}
                 >
                   Cadastrar
                 </button>

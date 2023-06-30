@@ -1,6 +1,46 @@
+import { useState } from "react";
 import Navbar from "../../components/Navbar";
+import { doc, getDoc, increment, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
 const Produtos = () => {
+  const [produtoId, setProdutoId] = useState("");
+  const [nome, setNome] = useState("");
+  const [proteina, setProteina] = useState("");
+  const [umidade, setUmidade] = useState("");
+  const [solubilidade, setSolubilidade] = useState("");
+  const navigate = useNavigate();
+  const contador = doc(db, "Produtos", "contador");
+  const docSnap = getDoc(contador);
+  const getId = async () => {
+    if (docSnap) {
+      const id = (await docSnap).data().contagem;
+      setProdutoId(id);
+    } else {
+      console.log("No such document!");
+    }
+  };
+
+  getId();
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      await setDoc(doc(db, "Produtos", `${produtoId}`), {
+        nome,
+        proteina,
+        umidade,
+        solubilidade
+      });
+      alert("Cliente Cadastrado com Sucesso");
+      updateDoc(contador, { contagem: increment(1) });
+      navigate("/selection");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -17,8 +57,8 @@ const Produtos = () => {
                     type="text"
                     className="form-control text-center"
                     id="id"
-                    placeholder="120"
-                    value=""
+                    placeholder={produtoId}
+                    defaultValue={produtoId}
                     disabled
                   />
                 </div>
@@ -29,10 +69,8 @@ const Produtos = () => {
                     className="form-control"
                     id="nome"
                     placeholder="Nome detalhado do produto"
-                    value=""
-                    required
+                    onChange={(e) => setNome(e.target.value)}
                   />
-                  <div className="invalid-feedback">Nome invalido</div>
                 </div>
               </div>
               <hr className="mb-4" />
@@ -47,7 +85,7 @@ const Produtos = () => {
                     className="form-control"
                     id="proteina"
                     placeholder="Proteina"
-                    required
+                    onChange={(e) => setProteina(e.target.value)}
                   />
                 </div>
                 <div className="col-md-4 mb-3">
@@ -58,7 +96,7 @@ const Produtos = () => {
                     className="form-control"
                     id="umidade"
                     placeholder="Umidade"
-                    required
+                    onChange={(e) => setUmidade(e.target.value)}
                   />
                 </div>
                 <div className="col-md-4 mb-3">
@@ -68,7 +106,7 @@ const Produtos = () => {
                     className="form-control"
                     id="solubilidade"
                     placeholder="Solubilidade"
-                    required
+                    onChange={(e) => setSolubilidade(e.target.value)}
                   />
                 </div>
               </div>
@@ -77,6 +115,7 @@ const Produtos = () => {
                 <button
                   className="btn btn-primary btn-lg btn-block px-5"
                   type="submit"
+                  onClick={handleClick}
                 >
                   Cadastrar
                 </button>
