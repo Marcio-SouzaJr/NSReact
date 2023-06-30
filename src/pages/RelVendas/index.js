@@ -1,39 +1,35 @@
 import Navbar from "../../components/Navbar";
-import { contrato } from "../../mocks/contrato";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useEffect, useState } from "react";
 
 const RelVendas = () => {
-    
-  const contratos = contrato;
-  const dias = Array.from({length: 31}, (_, i) => i + 1)
-  const meses = Array.from({length: 12}, (_, i) => i + 1)
+  const [contratos, setContratos] = useState(false);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let lista = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "Vendas"));
+        querySnapshot.forEach((doc) => {
+          lista.push({ id: doc.id, ...doc.data() });
+        });
+        lista = lista.filter((item) => {
+          return item.id !== "contador";
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      setContratos(lista);
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
       <Navbar />
-      <div className=" row py-4 px-5 d-flex justify-content-center">
-      <div className="col-6">
-          <select>
-          <option value={""}>Dia</option>
-          {dias.map((dia, index) => {
-            return (
-              <option value={dia} key={dia} index={index}>
-                  {dia}
-                </option>
-            )
-          })}
-          </select>
-          <select>
-          <option value={""}>Mes</option>
-          {meses.map((mes, index) => {
-            return (
-              <option value={mes} key={mes} index={index}>
-                  {mes}
-                </option>
-            )
-          })}
-          </select>
-        </div>
-      </div>
+      <div className=" row py-4 px-5 d-flex justify-content-center"></div>
       <div className="row mx-3 border shadow">
         <table className="table table-striped table-bordered table-hover">
           <thead>
@@ -49,12 +45,14 @@ const RelVendas = () => {
             </tr>
           </thead>
           <tbody>
-            {contratos.sort().map((contratos) => {
+            {contratos ? (contratos.sort().map((contratos) => {
+              const date = contratos.data.toDate()
+              console.log(date)
               return (
                 <tr>
                   <td>{contratos.id}</td>
                   <td>{contratos.fabrica}</td>
-                  <td>{contratos.data}</td>
+                  <td>{date.toLocaleDateString()}</td>
                   <td>{contratos.cliente}</td>
                   <td>{contratos.produto}</td>
                   <td>{contratos.frete}</td>
@@ -62,7 +60,7 @@ const RelVendas = () => {
                   <td>{contratos.volume}</td>
                 </tr>
               );
-            })}
+            })) : (<></>)}
           </tbody>
         </table>
       </div>

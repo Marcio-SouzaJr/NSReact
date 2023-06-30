@@ -1,10 +1,22 @@
 import Navbar from "../../components/Navbar";
-import { doc, getDoc, increment, setDoc, updateDoc, Timestamp } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  increment,
+  setDoc,
+  updateDoc,
+  Timestamp,
+  getDocs,
+  collection,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Vendas = () => {
+  const [clientes, setClientes] = useState("");
+  const [fabricas, setFabricas] = useState("");
+  const [produtos, setProdutos] = useState("");
   const [vendaId, setVendaId] = useState("");
   const [fabrica, setFabrica] = useState("");
   const [data, setData] = useState("");
@@ -27,6 +39,58 @@ const Vendas = () => {
 
   getId();
 
+  useEffect(() => {
+    const fetchClientes = async () => {
+      let lista = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "Clientes"));
+        querySnapshot.forEach((doc) => {
+          lista.push({ id: doc.id, ...doc.data() });
+        });
+        lista = lista.filter((item) => {
+          return item.id !== "contador";
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      setClientes(lista);
+    };
+    const fetchFabricas = async () => {
+      let lista = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "Fabricas"));
+        querySnapshot.forEach((doc) => {
+          lista.push({ id: doc.id, ...doc.data() });
+        });
+        lista = lista.filter((item) => {
+          return item.id !== "contador";
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      setFabricas(lista);
+    };
+    const fetchProdutos = async () => {
+      let lista = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "Produtos"));
+        querySnapshot.forEach((doc) => {
+          lista.push({ id: doc.id, ...doc.data() });
+        });
+        lista = lista.filter((item) => {
+          return item.id !== "contador";
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      setProdutos(lista);
+    };
+
+    fetchClientes();
+    fetchFabricas();
+    fetchProdutos();
+  }, []);
+
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -37,7 +101,7 @@ const Vendas = () => {
         produto,
         frete,
         preco,
-        volume
+        volume,
       });
       alert("Venda Cadastrada com Sucesso");
       updateDoc(contador, { contagem: increment(1) });
@@ -77,8 +141,21 @@ const Vendas = () => {
                     onChange={(e) => setFabrica(e.target.value)}
                   >
                     <option selected>Selecionar Fabrica</option>
-                    <option value="Oleoplan Nordeste">Oleoplan Nordeste</option>
-                    <option value="Cargill Barreiras">Cargill Barreiras</option>
+                    {fabricas ? (
+                      fabricas.map((fabrica, index) => {
+                        return (
+                          <option
+                            value={fabrica.nomeReduzido}
+                            key={fabrica.nomeReduzido}
+                            index={index}
+                          >
+                            {fabrica.nomeReduzido}
+                          </option>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
                   </select>
                 </div>
                 <div className="w-25 mb-3">
@@ -87,7 +164,9 @@ const Vendas = () => {
                     type="date"
                     className="form-control"
                     id="data"
-                    onChange={(e) => setData(Timestamp.fromDate(new Date(e.target.value)))}
+                    onChange={(e) =>
+                      setData(Timestamp.fromDate(new Date(e.target.value)))
+                    }
                   />
                 </div>
               </div>
@@ -100,10 +179,21 @@ const Vendas = () => {
                     onChange={(e) => setCliente(e.target.value)}
                   >
                     <option selected>Cliente</option>
-                    <option value="Jose de Almeida Cordeiro">Jose de Almeida Cordeiro</option>
-                    <option value="Plantel Agro">Plantel Agro</option>
-                    <option value="Cleiton Fabiano">Cleiton Fabiano</option>
-                    <option value="Adelbar Portes">Adelbar Portes</option>
+                    {clientes ? (
+                      clientes.map((cliente, index) => {
+                        return (
+                          <option
+                            value={cliente.nomeReduzido}
+                            key={cliente.nomeReduzido}
+                            index={index}
+                          >
+                            {cliente.nomeReduzido}
+                          </option>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
                   </select>
                 </div>
                 <div className="w-50 mb-3">
@@ -114,10 +204,21 @@ const Vendas = () => {
                     onChange={(e) => setProduto(e.target.value)}
                   >
                     <option selected>Produto</option>
-                    <option value="Farelo de Soja Granel 45%">Farelo de Soja Granel 45%</option>
-                    <option value="Farelo de Soja Granel 46%">Farelo de Soja Granel 46%</option>
-                    <option value="Farelo de Soja Ensacado">Farelo de Soja Ensacado</option>
-                    <option value="Casca de Soja">Casca de Soja</option>
+                    {produtos ? (
+                      produtos.map((produto, index) => {
+                        return (
+                          <option
+                            value={produto.nome}
+                            key={produto.nome}
+                            index={index}
+                          >
+                            {produto.nome}
+                          </option>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
                   </select>
                 </div>
               </div>
@@ -138,10 +239,7 @@ const Vendas = () => {
                 <div className="mb-3 w-50">
                   <label for="preco">Preço</label>
                   <div className="input-group">
-                    <span
-                      className="input-group-text"
-                      id="basic-addon3"
-                    >
+                    <span className="input-group-text" id="basic-addon3">
                       R$
                     </span>
                     <input

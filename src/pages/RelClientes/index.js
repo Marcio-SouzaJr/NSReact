@@ -25,7 +25,6 @@ const RelClientes = () => {
       return item.nomeReduzido === nome;
     });
     setCliente(novaLista);
-    console.log(cliente[0].setor);
   };
 
   useEffect(() => {
