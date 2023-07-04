@@ -18,10 +18,29 @@ const Vendas = () => {
   const [fabricas, setFabricas] = useState("");
   const [produtos, setProdutos] = useState("");
   const [vendaId, setVendaId] = useState("");
+
   const [fabrica, setFabrica] = useState("");
+  const [fabricaLogradouro, setFabricaLogradouro] = useState("");
+  const [fabricaMunicipio, setFabricaMunicipio] = useState("");
+  const [fabricaEstado, setFabricaEstado] = useState("");
+  const [fabricaCep, setFabricaCep] = useState("");
+
   const [data, setData] = useState("");
+
   const [cliente, setCliente] = useState("");
+  const [clienteDocumento, setClienteDocumento] = useState("");
+  const [clienteInscricao, setClienteInscricao] = useState("");
+  const [clienteLogradouro, setClienteLogradouro] = useState("");
+  const [clienteMunicipio, setClienteMunicipio] = useState("");
+  const [clienteEstado, setClienteEstado] = useState("");
+  const [clienteCep, setClienteCep] = useState("");
+  const [clientePrazo, setClientePrazo] = useState("");
+
   const [produto, setProduto] = useState("");
+  const [produtoProteina, setProdutoProteina] = useState("");
+  const [produtoSolubilidade, setProdutoSolubilidade] = useState("");
+  const [produtoUmidade, setProdutoUmidade] = useState("");
+
   const [frete, setFrete] = useState("");
   const [preco, setpreco] = useState("");
   const [volume, setVolume] = useState("");
@@ -96,9 +115,23 @@ const Vendas = () => {
     try {
       await setDoc(doc(db, "Vendas", `${vendaId}`), {
         fabrica,
+        fabricaLogradouro,
+        fabricaMunicipio,
+        fabricaEstado,
+        fabricaCep,
         data,
         cliente,
+        clienteDocumento,
+        clienteInscricao,
+        clienteLogradouro,
+        clienteMunicipio,
+        clienteEstado,
+        clienteCep,
+        clientePrazo,
         produto,
+        produtoProteina,
+        produtoSolubilidade,
+        produtoUmidade,
         frete,
         preco,
         volume,
@@ -109,6 +142,42 @@ const Vendas = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleFabrica = (id, fabricas) => {
+    let fabrica = "";
+    fabrica = fabricas.filter((item) => {
+      return item.id === id;
+    });
+    setFabrica(fabrica[0].razao);
+    setFabricaLogradouro(fabrica[0].logradouro);
+    setFabricaMunicipio(fabrica[0].municipio);
+    setFabricaEstado(fabrica[0].estado);
+    setFabricaCep(fabrica[0].cep);
+  };
+  const handleCliente = (id, clientes) => {
+    let cliente = "";
+    cliente = clientes.filter((item) => {
+      return item.id === id;
+    });
+    setCliente(cliente[0].nomeCompleto);
+    setClienteDocumento(cliente[0].documento);
+    setClienteInscricao(cliente[0].inscricao);
+    setClienteLogradouro(cliente[0].logradouro);
+    setClienteMunicipio(cliente[0].municipio);
+    setClienteEstado(cliente[0].estado);
+    setClienteCep(cliente[0].cep);
+    setClientePrazo(cliente[0].prazo);
+  };
+  const handleProduto = (id, produtos) => {
+    let produto = "";
+    produto = produtos.filter((item) => {
+      return item.id === id;
+    });
+    setProduto(produto[0].nome);
+    setProdutoProteina(produto[0].proteina);
+    setProdutoSolubilidade(produto[0].solubilidade);
+    setProdutoUmidade(produto[0].umidade);
   };
 
   return (
@@ -138,14 +207,14 @@ const Vendas = () => {
                   <select
                     className="form-select"
                     id="nome"
-                    onChange={(e) => setFabrica(e.target.value)}
+                    onChange={(e) => handleFabrica(e.target.value, fabricas)}
                   >
                     <option selected>Selecionar Fabrica</option>
                     {fabricas ? (
                       fabricas.map((fabrica, index) => {
                         return (
                           <option
-                            value={fabrica.nomeReduzido}
+                            value={fabrica.id}
                             key={fabrica.nomeReduzido}
                             index={index}
                           >
@@ -176,14 +245,14 @@ const Vendas = () => {
                   <select
                     className="form-select"
                     id="cliente"
-                    onChange={(e) => setCliente(e.target.value)}
+                    onChange={(e) => handleCliente(e.target.value, clientes)}
                   >
                     <option selected>Cliente</option>
                     {clientes ? (
                       clientes.map((cliente, index) => {
                         return (
                           <option
-                            value={cliente.nomeReduzido}
+                            value={cliente.id}
                             key={cliente.nomeReduzido}
                             index={index}
                           >
@@ -201,14 +270,14 @@ const Vendas = () => {
                   <select
                     className="form-select"
                     id="produto"
-                    onChange={(e) => setProduto(e.target.value)}
+                    onChange={(e) => handleProduto(e.target.value, produtos)}
                   >
                     <option selected>Produto</option>
                     {produtos ? (
                       produtos.map((produto, index) => {
                         return (
                           <option
-                            value={produto.nome}
+                            value={produto.id}
                             key={produto.nome}
                             index={index}
                           >

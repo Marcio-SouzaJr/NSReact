@@ -178,6 +178,45 @@
 
 /* media queries */
 
+.print {
+  display: none;
+}
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  .print {
+    display: block;
+  }
+  .logo {
+    width: 100px;
+  }
+
+  .numeracao {
+    border: 2px solid #150301;
+  }
+  .letras-pequenas {
+    font-size: smaller;
+  }
+  .atraso {
+    font-size: smaller;
+  }
+  .liberacao {
+    font-size: small;
+  }
+  .horarios {
+    font-size: small;
+  }
+  .signature {
+    border: 0;
+    border-top: 1px solid #000;
+  }
+  .tabela-qualidade {
+    font-size: small;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .selection-base {
     height: 100%;

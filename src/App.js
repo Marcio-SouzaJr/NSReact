@@ -15,6 +15,7 @@ import RelVendas from "./pages/RelVendas";
 import RelEmbarques from "./pages/RelEmbarques";
 import { useContext } from "react";
 import { AuthContext } from "./contexts/AuthContext";
+import Contratos from "./pages/Contratos";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -118,6 +119,14 @@ function App() {
           element={
             <RequireAuth>
               <RelEmbarques />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/relatorios/contratos"
+          element={
+            <RequireAuth>
+              <Contratos />
             </RequireAuth>
           }
         />

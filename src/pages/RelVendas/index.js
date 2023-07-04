@@ -47,7 +47,6 @@ const RelVendas = () => {
           <tbody>
             {contratos ? (contratos.sort().map((contratos) => {
               const date = contratos.data.toDate()
-              console.log(date)
               return (
                 <tr>
                   <td>{contratos.id}</td>

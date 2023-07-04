@@ -1,10 +1,22 @@
 import Navbar from "../../components/Navbar";
-import { Timestamp, doc, getDoc, increment, setDoc, updateDoc } from "firebase/firestore";
+import {
+  Timestamp,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  increment,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Embarques = () => {
+  const [clientes, setClientes] = useState("");
+  const [contratos, setContratos] = useState("");
+  const [contratosFiltrados, setContratosFiltrados] = useState("");
   const [emabrqueId, setEmbarqueId] = useState("");
   const [cliente, setCliente] = useState("");
   const [contrato, setContrato] = useState("");
@@ -26,6 +38,43 @@ const Embarques = () => {
 
   getId();
 
+  useEffect(() => {
+    const fetchClientes = async () => {
+      let lista = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "Clientes"));
+        querySnapshot.forEach((doc) => {
+          lista.push({ id: doc.id, ...doc.data() });
+        });
+        lista = lista.filter((item) => {
+          return item.id !== "contador";
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      setClientes(lista);
+    };
+
+    const fetchContratos = async () => {
+      let lista = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "Vendas"));
+        querySnapshot.forEach((doc) => {
+          lista.push({ id: doc.id, ...doc.data() });
+        });
+        lista = lista.filter((item) => {
+          return item.id !== "contador";
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      setContratos(lista);
+    };
+
+    fetchClientes();
+    fetchContratos();
+  }, []);
+
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -37,12 +86,23 @@ const Embarques = () => {
         nf,
         data,
       });
-      alert("Cliente Cadastrado com Sucesso");
+      alert("Embarque Cadastrado com Sucesso");
       updateDoc(contador, { contagem: increment(1) });
       navigate("/selection");
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const filtrarContratos = (nome) => {
+    let contratoLocal = [];
+    if (nome === "cliente") {  
+       contratoLocal = contratos
+      }
+     else {
+      contratoLocal = contratos.filter(contrato => contrato.cliente === nome)
+    }
+    return setContratosFiltrados(contratoLocal)
   };
 
   return (
@@ -61,13 +121,29 @@ const Embarques = () => {
                   <select
                     className="form-select"
                     id="cliente"
-                    onChange={(e) => setCliente(e.target.value)}
+                    onChange={(e) => {
+                      setCliente(e.target.value);
+                      filtrarContratos(e.target.value)
+                    }}
                   >
-                    <option selected>Cliente</option>
-                    <option value="1">Jose de Almeida Cordeiro</option>
-                    <option value="2">Plantel Agro</option>
-                    <option value="3">Cleiton Fabiano</option>
-                    <option value="3">Adelbar Portes</option>
+                    <option selected value={"cliente"}>
+                      Cliente
+                    </option>
+                    {clientes ? (
+                      clientes.map((cliente, index) => {
+                        return (
+                          <option
+                            value={cliente.nomeReduzido}
+                            key={cliente.nomeReduzido}
+                            index={index}
+                          >
+                            {cliente.nomeReduzido}
+                          </option>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
                   </select>
                 </div>
                 <div className="w-50 mb-3">
@@ -77,17 +153,22 @@ const Embarques = () => {
                     id="contrato"
                     onChange={(e) => setContrato(e.target.value)}
                   >
-                    <option selected>Contrato</option>
-                    <option value="1">
-                      3160 - Plantel - Farelo Granel 45%
-                    </option>
-                    <option value="2">3161 - Center Raçoes - Casca</option>
-                    <option value="3">
-                      3162 - Granja Almeida - Farelo Granel 46%
-                    </option>
-                    <option value="4">
-                      3163 - Adelbar Pontes - Farelo Granel 45%
-                    </option>
+                    <option selected>Contratos</option>
+                    {contratosFiltrados ? (
+                      contratosFiltrados.map((contrato, index) => {
+                        return (
+                          <option
+                            value={contrato.id}
+                            key={contrato.id}
+                            index={index}
+                          >
+                            {`${contrato.id} - ${contrato.produto} ${contrato.frete}`}
+                          </option>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
                   </select>
                 </div>
 
@@ -136,7 +217,9 @@ const Embarques = () => {
                     type="date"
                     className="form-control"
                     id="data"
-                    onChange={(e) => setData(Timestamp.fromDate(new Date(e.target.value)))}
+                    onChange={(e) =>
+                      setData(Timestamp.fromDate(new Date(e.target.value)))
+                    }
                   />
                 </div>
               </div>
