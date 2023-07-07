@@ -2,6 +2,7 @@ import { db } from "../../firebase";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import logo from "../../assets/logo-color.png";
+import Navbar from "../../components/Navbar";
 
 const Contratos = () => {
   const [contratos, setContratos] = useState([]);
@@ -9,6 +10,34 @@ const Contratos = () => {
   const [fabrica, setFabrica] = useState("");
   const [fabricaLogradouro, setFabricaLogradouro] = useState("");
   const [fabricaCep, setFabricaCep] = useState("");
+  const [fabricaMunicipio, setFabricaMunicipio] = useState("");
+  const [fabricaEstado, setFabricaEstado] = useState("");
+  const [prazo, setPrazo] = useState("");
+  const [volume, setVolume] = useState("");
+  const [preco, setPreco] = useState("");
+  const [clienteNome, setClienteNome] = useState("");
+  const [clienteDocumento, setClienteDocumento] = useState("");
+  const [clienteInscricao, setClienteInscricao] = useState("");
+  const [clienteLogradouro, setClienteLogradouro] = useState("");
+  const [clienteMunicipio, setClienteMunicipio] = useState("");
+  const [clienteEstado, setClienteEstado] = useState("");
+  const [clienteCep, setClienteCep] = useState("");
+  const [produto, setProduto] = useState("");
+  const [produtoProteina, setProdutoProteina] = useState("");
+  const [produtoUmidade, setProdutoUmidade] = useState("");
+  const [produtoSolubilidade, setProdutoSolubilidade] = useState("");
+  const [frete, setFrete] = useState("");
+  const [data, setData] = useState("");
+  const getDate = () => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + "/" + dd + "/" + yyyy;
+
+    setData(today)
+  };
 
   useEffect(() => {
     const fetchContratos = async () => {
@@ -39,14 +68,40 @@ const Contratos = () => {
     setFabrica(contrato[0].fabrica);
     setFabricaLogradouro(contrato[0].fabricaLogradouro);
     setFabricaCep(contrato[0].fabricaCep);
+    setFabricaMunicipio(contrato[0].fabricaMunicipio);
+    setFabricaEstado(contrato[0].fabricaEstado);
+    setPrazo(contrato[0].clientePrazo);
+    setVolume(contrato[0].volume);
+    setPreco(contrato[0].preco);
+    setClienteNome(contrato[0].cliente);
+    setClienteDocumento(contrato[0].clienteDocumento);
+    setClienteInscricao(contrato[0].clienteInscricao);
+    setClienteLogradouro(contrato[0].clienteLogradouro);
+    setClienteMunicipio(contrato[0].clienteMunicipio);
+    setClienteEstado(contrato[0].clienteEstado);
+    setClienteCep(contrato[0].clienteCep);
+    setProduto(contrato[0].produto);
+    setProdutoProteina(contrato[0].produtoProteina);
+    setProdutoUmidade(contrato[0].produtoUmidade);
+    setProdutoSolubilidade(contrato[0].produtoSolubilidade);
+    setFrete(contrato[0].frete);
+    getDate()
   };
+
+
+
+
+
 
   return (
     <>
-      <div class="no-print p-5 m-5">
+    <Navbar />
+      <div className="no-print home-base w-50 bg-light">
+        <div className="home-center d-flex flex-column flex-md-row justify-content-center align-items-center bg-secondary">
         <select
           name="contrato"
           id="contrato"
+          className=" col-3 col-6"
           onChange={(e) => {
             handleContrato(e.target.value, contratos);
           }}
@@ -60,9 +115,12 @@ const Contratos = () => {
             );
           })}
         </select>
-        <button class="button" id="botao">
+        <button class="btn btn-primary btn-md btn-block fw-bold col-6 ms-md-2 mt-2 " id="botao" onClick={() => {
+          window.print()
+        }}>
           Gerar contrato
         </button>
+        </div>
       </div>
       <div className="print">
         <div className="container-fluid d-flex justify-content-between align-items-center pagina">
@@ -80,31 +138,31 @@ const Contratos = () => {
           </p>
           <h6>Vendedor:</h6>
           <p>
-            {`${fabrica}, ${fabricaLogradouro}, CEP: ${fabricaCep}, CPF/CNPJ: 13.463.913/0003-58 IRAQUARA/BA`}
+            {`${fabrica}, ${fabricaLogradouro}, ${fabricaMunicipio}/${fabricaEstado} CEP: ${fabricaCep}, CPF/CNPJ: 13.463.913/0003-58`}
           </p>
           <h6>Comprador:</h6>
           <p className="lh-1">
-            DADOS PARA EMISSÃO DE DOCUMENTAÇÃO FISCAL: Granja Canaã Brejão
-            Produção de Ovos LTDA CNPJ: 29.264.697/0001-90. IE: 75000172 Granja
-            Canaa - Zona Rural - Brejão - PE CEP: 55.325-000
+            {`DADOS PARA EMISSÃO DE DOCUMENTAÇÃO FISCAL: ${clienteNome} CPF/CNPJ: ${clienteDocumento}. IE: ${clienteInscricao}. ${clienteLogradouro} - ${clienteMunicipio}/${clienteEstado} CEP: ${clienteCep}`}
           </p>
           <p>
-            <span className="fw-bold lh-1">Pagamento: </span>Com Boleto bancário
-            com vencimento para 25 dias.
+            <span className="fw-bold lh-1">Pagamento: </span>
+            {`Com Boleto bancário
+            com vencimento para ${prazo}`}
+            .
           </p>
           <p>
             <span className="fw-bold lh-1">Quantidade e Descição: </span>
-            90.000KG de Farelo de Soja Granel
+            {`${volume}.000KG de ${produto}`}
           </p>
         </div>
         <div className="detalhes d-flex flex-wrap">
           <div className="detalhe col-4">
             <span className="fw-bold">Preço:</span>
-            R$ 2380,00/ton
+            {`R$ ${preco},00/ton`}
           </div>
           <div className="detalhe col-4">
             <span className="fw-bold">Total:</span>
-            R$ 214.200,00
+            {`R$ ${preco * volume},00`}
           </div>
           <div className="detalhe col-4">
             <span className="fw-bold">Impostos(PIS/COFINS):</span>
@@ -120,7 +178,7 @@ const Contratos = () => {
           </div>
           <div class="detalhe col-12">
             <span class="fw-bold">Prazo de Retirada:</span>
-            Com Boleto bancário com vencimento para 25 dias.
+            Um mes após data de fechamento do contrato.
           </div>
         </div>
         <div className="qualidade d-flex">
@@ -138,15 +196,16 @@ const Contratos = () => {
               <tbody>
                 <tr>
                   <th scope="row">%</th>
-                  <td>Min. 46%</td>
-                  <td>Max. 12,5%</td>
-                  <td>Max. 80%</td>
+                  <td>{`Min. ${produtoProteina}%`}</td>
+                  <td>{`Max. ${produtoUmidade}%`}</td>
+                  <td>{`Max. ${produtoSolubilidade}%`}</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p class="ms-4">
-            <span class="fw-bold">Frente:</span> FOB
+            <span class="fw-bold">Frete:</span>
+            {frete}
           </p>
         </div>
         <div class="liberacao lh-1">
@@ -223,14 +282,14 @@ const Contratos = () => {
             <input
               type="text"
               class="signature col-9 mt-3"
-              placeholder="Oleoplan Nordeste"
+              placeholder={fabrica}
             />
           </div>
           <div class="assinatura col-6">
             <input
               type="text"
               class="signature col-9 mt-3"
-              placeholder="Granja Canaa"
+              placeholder={clienteNome}
             />
           </div>
           <div class="assinatura col-6">
@@ -249,7 +308,7 @@ const Contratos = () => {
           </div>
         </div>
         <div class="data-absolute position-absolute bottom-0 end-0">
-          Recife, 03 de Julho de 2023
+          {`Recife ${data}`}
         </div>
       </div>
     </>

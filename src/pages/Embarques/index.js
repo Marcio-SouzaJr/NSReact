@@ -9,9 +9,11 @@ import {
   setDoc,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db, storage } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { CheckLg } from "react-bootstrap-icons";
 
 const Embarques = () => {
   const [clientes, setClientes] = useState("");
@@ -24,6 +26,7 @@ const Embarques = () => {
   const [placa, setPlaca] = useState("");
   const [nf, setNf] = useState("");
   const [data, setData] = useState("");
+  const [file, setFile] = useState("");
   const navigate = useNavigate();
   const contador = doc(db, "Embarques", "contador");
   const docSnap = getDoc(contador);
@@ -73,7 +76,40 @@ const Embarques = () => {
 
     fetchClientes();
     fetchContratos();
-  }, []);
+    const uploadFile = () => {
+      const storageRef = ref(storage, nf);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+              break;
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("File available at", downloadURL);
+          });
+        }
+      );
+    };
+
+    file && uploadFile();
+  }, [file]);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -96,13 +132,12 @@ const Embarques = () => {
 
   const filtrarContratos = (nome) => {
     let contratoLocal = [];
-    if (nome === "cliente") {  
-       contratoLocal = contratos
-      }
-     else {
-      contratoLocal = contratos.filter(contrato => contrato.cliente === nome)
+    if (nome === "cliente") {
+      contratoLocal = contratos;
+    } else {
+      contratoLocal = contratos.filter((contrato) => contrato.cliente === nome);
     }
-    return setContratosFiltrados(contratoLocal)
+    return setContratosFiltrados(contratoLocal);
   };
 
   return (
@@ -123,7 +158,7 @@ const Embarques = () => {
                     id="cliente"
                     onChange={(e) => {
                       setCliente(e.target.value);
-                      filtrarContratos(e.target.value)
+                      filtrarContratos(e.target.value);
                     }}
                   >
                     <option selected value={"cliente"}>
@@ -133,7 +168,7 @@ const Embarques = () => {
                       clientes.map((cliente, index) => {
                         return (
                           <option
-                            value={cliente.nomeReduzido}
+                            value={cliente.nomeCompleto}
                             key={cliente.nomeReduzido}
                             index={index}
                           >
@@ -223,7 +258,16 @@ const Embarques = () => {
                   />
                 </div>
               </div>
-
+              <div className="col-6">
+                <input
+                  className="form-control"
+                  type="file"
+                  id="formFile"
+                  onChange={(e) => {
+                    setFile(e.target.files[0]);
+                  }}
+                />
+              </div>
               <div align="center" className="py-2">
                 <button
                   className="btn btn-primary btn-lg btn-block px-5"

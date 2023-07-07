@@ -88,7 +88,7 @@ const Saldos = () => {
               {clientes.sort()?.map((cliente, index) => {
                 return (
                   <option
-                    value={cliente.nomeReduzido}
+                    value={cliente.nomeCompleto}
                     key={cliente.nomeReduzido}
                     index={index}
                   >
